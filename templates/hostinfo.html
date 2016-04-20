@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>分页演示</title>
+  <meta http-equiv="keyworks" name="test">
+  <meta http-equiv="content-TYPE" content="text/html;charset=utf-8">
+  <!-- 
+  <meta http-equiv="Refresh" content="5">
+  <meta http-equiv="Refresh" content="30;URL=http://XXXX/"/>
+   -->
+  <link rel="stylesheet" type="text/css" href="css/common.css">
+  <link rel="shortcut icon" href="images/header.ico">
+  
+  <style>
+  #Pageing A{
+  	background-color:#008844;
+  	border:1px solid white;
+  	text-decoration:none;
+  	color:white;
+  	padding:.1em .6em .2em .6em;
+  
+  
+  }
+  #Pageing A.selected{ 
+   	background-color: #AA7700; 
+   	color:red;
+   	}
+  	
+  </style>
+</head>
+<body>
+
+
+<h1>主机信息</h1>
+
+<table border='1'>
+{%  for item in data %}
+    <tr>
+    	<td>{{item.HostName}}</td>
+    	<td>{{item.Ip}}</td>
+    
+    </tr>
+    {%  endfor %}
+</table>
+<div>总条数：{{ count }}</div>
+
+<div id='Pageing'>
+   {{ page }}
+
+</div>
+
+<div>
+    <select id='s1' onchange='ChangePageItem(this);'>
+       <option value='10'>10</option>
+    	<option value='30'>30</option>
+    	<option value='50'>50</option>
+    	<option value='100'>100</option>
+    </select>
+
+
+</div>
+<script src='/static/jquery/jquery-2.1.4.js' ></script>
+<script src='/static/jquery/jquery.cookie.js'></script>
+<script type='text/javascript'>
+$(function(){
+    var per_item = $.cookie("list_pager_num")
+     if(per_item){
+       $('#s1').val(per_item);
+     }
+})
+  function ChangePageItem(arg){
+	  //创建或者修改cookies的值
+	  var value = $(arg).val();
+	 
+	   $.cookie("list_pager_num",value,{ path: '/' });
+	  
+	  
+  }
+
+</script>
+
+</body>

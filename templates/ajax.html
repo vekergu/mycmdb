@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>form注册页</title>
+  <meta http-equiv="keyworks" name="test">
+  <meta http-equiv="content-TYPE" content="text/html;charset=utf-8">
+  <!-- 
+  <meta http-equiv="Refresh" content="5">
+  <meta http-equiv="Refresh" content="30;URL=http://XXXX/"/>
+   
+  <link rel="stylesheet" type="text/css" href="css/common.css">
+  <link rel="shortcut icon" href="images/header.ico">
+  -->
+  
+</head>
+<body>
+<input type='text' id='na' />
+<input type='button' value='点击执行ajax' onclick='DoAjax();'/>
+
+<script src='/static/jquery/jquery-2.1.4.js' ></script>
+
+<script type='text/javascript'>
+  function DoAjax(){
+	var temp = $('#na').val();
+	$.ajax({
+       url:'/ajax/',
+	   type:'POST',
+		data:{dat:temp},
+		success:function(arg){
+			var obj = jQuery.parseJSON(arg);
+			console.log(obj.status);
+			console.log(obj.msg);
+			console.log('success');
+		},
+		error:function(){
+			console.log('failed')
+		}
+    });
+
+}
+</script>
+</body>
+</html>
